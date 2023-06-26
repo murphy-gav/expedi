@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Admin Template</title>
+    <meta name="author" content="David Grzyb">
+    <meta name="description" content="">
+
+    <!-- Tailwind -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+        .font-family-karla { font-family: karla; }
+        .bg-sidebar { background: #101e53; }
+        .cta-btn { color: #811281; }
+        .upgrade-btn { background: #1947ee; }
+        .upgrade-btn:hover { background: #0038fd; }
+        .active-nav-link { background: #811281; }
+        .nav-item:hover { background: #811281; }
+        .account-link:hover { background: #3d68ff; }
+    </style>
+</head>
+<body class="bg-gray-100 font-family-karla flex">
+
+    <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
+        <div class="p-6">
+            <a href="{% url 'dashboard' %}" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">{{user.username}}</a>
+            <button onclick="window.location.href='{% url 'create_shipment' %}'" class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-plus mr-3"></i> Create Shipment
+            </button>    
+        </div>
+        <nav class="text-white text-base font-semibold pt-3">
+            <a href="{% url 'dashboard' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                Dashboard
+            </a>
+            <a href="{% url 'manage_shipments' %}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+                <i class="fas fa-table mr-3"></i>
+                Manage Shipment
+            </a>
+            <a href="{% url 'user_information' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-align-left mr-3"></i>
+                My Profile
+            </a>
+            <a href="{% url 'payment_settings' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-tablet-alt mr-3"></i>
+                Payment Settings
+            </a>
+            <a href="{% url 'support' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-calendar mr-3"></i>
+                Support
+            </a>
+        </nav>
+    </aside>
+
+    <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
+        <!-- Desktop Header -->
+        <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
+            <div class="w-1/2"></div>
+            <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
+                  {% if contact.image %}
+                    <img src="/static/assets/profileimg/{{ contact.image.url }}" />
+                  {% else %}
+                    <img src="/static/assets/profileimg/profile-default.jpg" />
+                  {% endif %}
+                </button>
+                <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
+                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
+                    <a href="{% url 'logout' %}" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Header & Nav -->
+        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
+            <div class="p-6">
+                <a href="{% url 'dashboard' %}" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">{{user.username}}</a>
+                <button onclick="window.location.href='{% url 'create_shipment' %}'" class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                    <i class="fas fa-plus mr-3"></i> Create Shipment
+                </button>    
+            </div>
+            <!--Dropdown Nav-->
+            <nav class="text-white text-base font-semibold pt-3">
+                <a href="{% url 'dashboard' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
+                </a>
+                <a href="{% url 'manage_shipments' %}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+                    <i class="fas fa-table mr-3"></i>
+                    Manage Shipment
+                </a>
+                <a href="{% url 'user_information' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-align-left mr-3"></i>
+                    My Profile
+                </a>
+                <a href="{% url 'payment_settings' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-tablet-alt mr-3"></i>
+                    Payment Settings
+                </a>
+                <a href="{% url 'support' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-calendar mr-3"></i>
+                    Support
+                </a>
+            </nav>
+            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-plus mr-3"></i> New Report
+            </button> -->
+        </header>
+    
+        <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+            <main class="w-full flex-grow p-6">
+                <h1 class="w-full text-3xl text-black pb-6">{% if object %}Update{% else %}Create{% endif %} Contact</h1>
+
+                <div class="flex flex-wrap">
+                    <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+                        <p class="text-xl pb-6 flex items-center">
+                            <i class="fas fa-list mr-3"></i> My Contact Information
+                        </p>
+                        <div class="leading-loose">
+                            <form  method="post" enctype="multipart/form-data" class="p-10 bg-white rounded shadow-xl">
+                                  {% csrf_token %}
+                                  <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                                    <label for="{{ form.image.id_for_label }}" style="width: 200px; height: 200px;" class="relative z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-blue-500 hover:text-blue-500 focus:border-gray-300 focus:outline-none transition duration-300 ease-in-out">
+                                      <span class="absolute inset-0 flex justify-center items-center opacity-0 hover:opacity-100 transition duration-300 ease-in-out">
+                                        <span class="bg-blue-500 text-white px-2 py-1 rounded-full">Change profile photo</span>
+                                      </span>
+                                      {% if contact.image %}
+                                        <img id="image-preview" src="/static/assets/profileimg/{{ form.instance.image.url }}">
+                                      {% else %}
+                                        <img id="image-preview" src="/static/assets/profileimg/default-profile.jpg">
+                                      {% endif %}
+                                    </label>
+                                    <input id="{{ form.image.id_for_label }}" name="{{ form.image.name }}" type="file" style="display:none;" accept="image/*" @change="isOpen = false; updateImagePreview(event)">
+                                  </div>
+                                  
+                                  <script>
+                                  function updateImagePreview(event) {
+                                    var imagePreview = document.getElementById('image-preview');
+                                    var selectedFile = event.target.files[0];
+                                    var reader = new FileReader();
+                                    reader.onload = function(event) {
+                                      imagePreview.src = event.target.result;
+                                    };
+                                    reader.readAsDataURL(selectedFile);
+                                  }
+                                  </script>
+                                                                
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.name.id_for_label }}">Name</label>
+                                    <input value="{{ form.name.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.name.id_for_label }}" name="{{ form.name.name }}" type="text" required="" placeholder="Name" aria-label="Name">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.email.id_for_label }}">Email</label>
+                                    <input value="{{ form.email.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.email.id_for_label }}" name="{{ form.email.name }}" type="email" required="" placeholder="Email" aria-label="Email">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.company.id_for_label }}">Company</label>
+                                    <input value="{{ form.company.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.company.id_for_label }}" name="{{ form.company.name }}" type="text" required="" placeholder="Company" aria-label="Company">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.country.id_for_label }}">Country</label>
+                                    <input value="{{ form.country.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.country.id_for_label }}" name="{{ form.country.name }}" type="text" required="" placeholder="Country" aria-label="Country">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.address.id_for_label }}">Address</label>
+                                    <input value="{{ form.address.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.address.id_for_label }}" name="{{ form.address.name }}" type="text" required="" placeholder="Address" aria-label="Address">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.address2.id_for_label }}">Address 2</label>
+                                    <input value="{{ form.address2.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.address2.id_for_label }}" name="{{ form.address2.name }}" type="text" required="" placeholder="Address 2" aria-label="Address 2">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.city.id_for_label }}">City</label>
+                                    <input value="{{ form.city.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.city.id_for_label }}" name="{{ form.city.name }}" type="text" required="" placeholder="City" aria-label="City">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.state.id_for_label }}">State</label>
+                                    <input value="{{ form.state.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.state.id_for_label }}" name="{{ form.state.name }}" type="text" required="" placeholder="State" aria-label="State">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.zip_code.id_for_label }}">Postal Code</label>
+                                    <input value="{{ form.zip_code.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.zip_code.id_for_label }}" name="{{ form.zip_code.name }}" type="number" required="" placeholder="Postal Code" aria-label="Postal Code">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.phone_type.id_for_label }}">Phone Type</label>
+                                    <input value="{{ form.phone_type.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.phone_type.id_for_label }}" name="{{ form.phone_type.name }}" type="text" required="" placeholder="Phone Type" aria-label="Phone Type">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.phone_country_code.id_for_label }}">Phone Country Code</label>
+                                    <input value="{{ form.phone_country_code.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.phone_country_code.id_for_label }}" name="{{ form.phone_country_code.name }}" type="text" required="" placeholder="Phone Country Code" aria-label="Phone Country Code">
+                                  </div>
+                                  <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+                                    <input value="{{ form.phone_number.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.phone_number.id_for_label }}" name="{{ form.phone_number.name }}" type="number" required="" placeholder="Phone Number" aria-label="Phone Number">
+                                  </div>
+                                <div class="mt-6">
+                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Save</button></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    
+            <footer class="w-full bg-white text-right p-4">
+                 <a target="_blank" href="#" class="underline">Global-Wis @ Copyright 2023</a>.
+            </footer>
+        </div>
+        
+    </div>
+
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+{% include 'navbar.html' %}
+
+{% load static %}
+
+<section class="bg-[#F3F4F6] pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+  <div class="container mx-auto">
+    <div class="p-3 text-base bg-purple mt-7">
+      <h3 class="text-xl text-white uppercase">
+        Tracking Information
+      </h3>
+    </div>
+    {% if package %}
+    <div class="-mx-4 flex flex-wrap">
+      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-lg">
+          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+            <h3 class="uppercase text-lg">
+              Package ID
+            </h3>
+            <p class="mb-7 text-base leading-relaxed text-body-color">
+              {{ package.package_id }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-lg">
+          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+            <h3 class="uppercase text-lg">
+              Shipment Status
+            </h3>
+            <p class="m-2 inline-block rounded bg-secondary py-2 px-3 text-sm font-semibold text-white">
+              {{ shipment.status }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-lg">
+          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+            <h3 class="uppercase text-lg">
+              Sender
+            </h3>
+            <p class="mb-7 text-base leading-relaxed text-body-color">
+              {{ shipment.contact_info.sender_name }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="-mx-4 flex flex-wrap">
+      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-lg">
+          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+            <h3 class="uppercase text-lg">
+              Receiver
+            </h3>
+            <p class="mb-7 text-base leading-relaxed text-body-color">
+              {{ shipment.contact_info.receiver_name }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-lg">
+          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+            <h3 class="uppercase text-lg">
+              Pickup Country
+            </h3>
+            <p class="mb-7 text-base leading-relaxed text-body-color">
+              {{ package.pickup_country }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-lg">
+          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+            <h3 class="uppercase text-lg">
+              Delivery Country
+            </h3>
+            <p class="mb-7 text-base leading-relaxed text-body-color">
+              {{ package.delivery_country }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="-mx-4 flex flex-wrap">
+      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-lg">
+          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+            <h3 class="uppercase text-lg">
+              Weight
+            </h3>
+            <p class="mb-7 text-base leading-relaxed text-body-color">
+              {{ package.weight }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-lg">
+          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+            <h3 class="uppercase text-lg">
+              Height
+            </h3>
+            <p class="mb-7 text-base leading-relaxed text-body-color">
+              {{ package.height }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full px-4 md:w-1/2 xl:w-1/3">
+        <div class="mb-10 overflow-hidden rounded-lg">
+          <div class="p-8 text-center sm:p-9 md:p-7 xl:p-9">
+            <h3 class="uppercase text-lg">
+              Width
+            </h3>
+            <p class="mb-7 text-base leading-relaxed text-body-color">
+              {{ package.width }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="flex flex-row justify-center items-center" style="height:150px;padding-left:20px;">
+        <h2 class="text-xl mb-4 uppercase text-base text-bold">Package Image</h2>
+        <div style="width: 100px; height: 100px; margin-left:10px;" >
+          <img 
+              style="width: 100px; height: 100px;" 
+              alt="" 
+              class="w-full h-full rounded-full"
+              {% if shipment.image %}
+                    <img src="/static/images/{{ shipment.image }}" />
+              {% else %}
+                    <img src="/static/images/gbw-about-us.jpg" />
+              {% endif %}
+        </div>
+      </div>
+    </div>
+    {% comment %} Tracking Table Open {% endcomment %}
+    <div class="w-full flex justify-center items-center mt-6">
+      <div class="bg-white overflow-auto">
+        <div class="p-3 text-base bg-purple mt-7">
+          <h3 class="text-xl text-white uppercase">
+            Tracking History
+          </h3>
+        </div>
+          <table class="min-w-full bg-white">
+              <thead class="bg-gray-800 text-white">
+                  <tr>
+                      <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm text-black">Delivery STATUS</th>
+                      <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm text-black">Location</th>
+                      <th class="text-left py-3 px-4 uppercase font-semibold text-sm text-black">Date&Time(PT)</th>
+                  </tr>
+              </thead>
+              {% for route in routes %}
+              <tbody class="text-gray-700">
+                  <div class="shipment" data-id="{{ shipment.id }}" data-package="{{ shipment.package }}"></div>
+                  <tr>
+                      <td class="w-1/3 text-left py-3 px-4"><p class="m-2 inline-block rounded bg-secondary py-1 px-2 text-sm font-semibold text-white">
+                         {{route.delivery_status}}
+                      </p></td>
+                      <td class="w-1/3 text-left py-3 px-4"><p class="mb-7 text-base leading-relaxed text-body-color">
+                        {{ route.country }} - {{ route.state }}, {{ route.zip_code }} 
+                      </p></td>
+                      <td class="w-1/3 text-left py-3 px-4"><p class="mb-7 text-base leading-relaxed text-body-color">
+                        {{ route.time }}
+                      </p></td>
+                  </tr>
+              </tbody>
+              {% endfor %}
+              <div class="mb-9"/>
+              {% else %}
+              <p>Package not found</p>
+              {% endif %}
+            </table>
+      </div>
+  </div>
+    {% comment %} Tracking Table Closed {% endcomment %}
+  </div>
+</section>
+
+{% comment %} <table style="border-collapse: collapse; border: 1px solid black;">
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Package ID</td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Status</td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Sender</td>
+      <td style="border: 1px solid black; padding: 5px;"></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Recipient</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ shipment.contact_info.receiver_name }}</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Pickup Country</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ package.pickup_country }}</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Delivery Country</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ package.delivery_country }}</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Weight</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ package.weight }}</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Height</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ package.height }}</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Width</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ package.width }}</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Length</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ package.length }}</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Image</td>
+      <td style="border: 1px solid black; padding: 5px;"><img src="{{ shipment.image.url }}" alt="{{ shipment.image }}" width="200" height="200"></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Shipping Type</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ shipment.shipping_type }}</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Description</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ shipment.description }}</td>
+    </tr>
+    {% if shipment.current_state %}
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Current Location:</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ shipment.current_state }}, {{ shipment.current_country }}, {{ shipment.current_zip }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td style="border: 1px solid #383737; padding: 5px; background-color: #c0bcbc; color: #ffffff; font-weight: bold;">Created At:</td>
+      <td style="border: 1px solid black; padding: 5px;">{{ package.created_at }}</td>
+    </tr>
+  {% else %}
+    <tr>
+      <td colspan="2">Package not found</td>
+    </tr>
+  {% endif %}
+</table> {% endcomment %}
+
+
+{% include 'footer.html' %}

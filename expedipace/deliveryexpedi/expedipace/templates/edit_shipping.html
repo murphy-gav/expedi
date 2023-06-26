@@ -1,0 +1,117 @@
+  <h3>Edit Shipment</h3>
+  <form method="post" action="{% url 'edit_shipment' form.instance.id %}">
+    {% csrf_token %}
+    <!--Sender Information-->
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_name.id_for_label }}">Sender Name</label>
+      <input value="{{ form.sender_name.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_name.id_for_label }}" name="{{ form.sender_name.name }}" type="text" required="" placeholder="Sender Name" aria-label="Sender Name">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_company.id_for_label }}">Sender Company</label>
+      <input value="{{ form.sender_company.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_company.id_for_label }}" name="{{ form.sender_company.name }}" type="text" required="" placeholder="Sender Company" aria-label="Sender Company">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_pickup_country.id_for_label }}">Sender Country</label>
+      <input value="{{ form.sender_pickup_country.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_pickup_country.id_for_label }}" name="{{ form.sender_pickup_country.name }}" type="text" required="" placeholder="Country" aria-label="Sender Country">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_address.id_for_label }}">Address</label>
+      <input value="{{ form.sender_address.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_address.id_for_label }}" name="{{ form.sender_address.name }}" type="text" required="" placeholder="Address" aria-label="Sender Address">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_address2.id_for_label }}">Address2</label>
+      <input value="{{ form.sender_address2.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_address2.id_for_label }}" name="{{ form.sender_address2.name }}" type="text" required="" placeholder="Address2" aria-label="Sender Address2">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_address3.id_for_label }}">Address 3</label>
+      <input value="{{ form.sender_address3.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_address3.id_for_label }}" name="{{ form.sender_address3.name }}" type="text" required="" placeholder=" Address 3" aria-label="Sender Address 3">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_pickup_zip.id_for_label }}">Sender Zip Code</label>
+      <input value="{{ form.sender_pickup_zip.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_pickup_zip.id_for_label }}" name="{{ form.sender_pickup_zip.name }}" type="number" required="" placeholder="Zip Code" aria-label="Sender Zid Code">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_city.id_for_label }}">City</label>
+      <input value="{{ form.sender_city.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_city.id_for_label }}" name="{{ form.sender_city.name }}" type="text" required="" placeholder="City" aria-label="Sender City">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_state.id_for_label }}">State</label>
+      <input value="{{ form.sender_state.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_state.id_for_label }}" name="{{ form.sender_state.name }}" type="text" required="" placeholder=" State" aria-label="Sender State">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_email.id_for_label }}">Sender Email</label>
+      <input value="{{ form.sender_email.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_email.id_for_label }}" name="{{ form.sender_email.name }}" type="email" required="" placeholder="{{user.username}}" aria-label="Sender Email">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_phone_type.id_for_label }}">Phone Type</label>
+      <input value="{{ form.sender_phone_type.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_phone_type.id_for_label }}" name="{{ form.sender_phone_type.name }}" type="text" required="" placeholder="Office" aria-label="Sender Phone Type">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_phone_code.id_for_label }}">Country Code</label>
+      <input value="{{ form.sender_phone_code.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_phone_code.id_for_label }}" name="{{ form.sender_phone_code.name }}" type="number" required="" placeholder="+23" aria-label="Sender Country Code">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.sender_phone_number.id_for_label }}">Phone Number</label>
+      <input value="{{ form.sender_phone_number.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.sender_phone_number.id_for_label }}" name="{{ form.sender_phone_number.name }}" type="number" required="" placeholder="(834) 445-4453" aria-label="Sender Phone Number">
+    </div>
+    <!--Reciever Information-->
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_name.id_for_label }}">Reciever Name</label>
+      <input value="{{ form.receiver_name.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_name.id_for_label }}" name="{{ form.receiver_name.name }}" type="text" required="" placeholder="Reciever Name" aria-label="Reciever Name">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_company.id_for_label }}">Reciever Company</label>
+      <input value="{{ form.receiver_company.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_company.id_for_label }}" name="{{ form.receiver_company.name }}" type="text" required="" placeholder="Reciever Company" aria-label="Reciever Company">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_delivery_country.id_for_label }}">Reciever Country</label>
+      <input value="{{ form.receiver_delivery_country.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_delivery_country.id_for_label }}" name="{{ form.receiver_delivery_country.name }}" type="text" required="" placeholder="Country" aria-label="Receiver Country">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_address.id_for_label }}">Address</label>
+      <input value="{{ form.receiver_address.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_address.id_for_label }}" name="{{ form.receiver_address.name }}" type="text" required="" placeholder="Address" aria-label="Receiver Address">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_address2.id_for_label }}">Address2</label>
+      <input value="{{ form.receiver_address2.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_address2.id_for_label }}" name="{{ form.receiver_address2.name }}" type="text" required="" placeholder="Address2" aria-label="Receiver Address2">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_address3.id_for_label }}">Address 3</label>
+      <input value="{{ form.receiver_address3.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_address3.id_for_label }}" name="{{ form.receiver_address3.name }}" type="text" required="" placeholder=" Address 3" aria-label="Receiver Address 3">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_delivery_zip.id_for_label }}">Receiver Zip Code</label>
+      <input value="{{ form.receiver_delivery_zip.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_delivery_zip.id_for_label }}" name="{{ form.receiver_delivery_zip.name }}" type="number" required="" placeholder="Zip Code" aria-label="Receiver Zid Code">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_city.id_for_label }}">City</label>
+      <input value="{{ form.receiver_city.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_city.id_for_label }}" name="{{ form.receiver_city.name }}" type="text" required="" placeholder="City" aria-label="Receiver City">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_state.id_for_label }}">State</label>
+      <input value="{{ form.receiver_state.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_state.id_for_label }}" name="{{ form.receiver_state.name }}" type="text" required="" placeholder=" State" aria-label="Receiver State">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_email.id_for_label }}">Receiver Email</label>
+      <input value="{{ form.receiver_email.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_email.id_for_label }}" name="{{ form.receiver_email.name }}" type="email" required="" placeholder="jeff@example.com" aria-label="Receiver Email">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_phone_type.id_for_label }}">Phone Type</label>
+      <input value="{{ form.receiver_phone_type.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_phone_type.id_for_label }}" name="{{ form.receiver_phone_type.name }}" type="text" required="" placeholder="Office" aria-label="Receiver Phone Type">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_phone_code.id_for_label }}">Country Code</label>
+      <input value="{{ form.receiver_phone_code.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_phone_code.id_for_label }}" name="{{ form.receiver_phone_code.name }}" type="number" required="" placeholder="+23" aria-label="Receiver Country Code">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.receiver_phone_number.id_for_label }}">Phone Number</label>
+      <input value="{{ form.receiver_phone_number.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.receiver_phone_number.id_for_label }}" name="{{ form.receiver_phone_number.name }}" type="number" required="" placeholder="(834) 445-4453" aria-label="Receiver Phone Number">
+    </div>
+    <div class="mt-2">
+      <label class="block text-sm text-gray-600" for="{{ form.vat_tax_id.id_for_label }}">Vat & Tax ID</label>
+      <input value="{{ form.vat_tax_id.value }}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="{{ form.vat_tax_id.id_for_label }}" name="{{ form.vat_tax_id.name }}" type="number"  placeholder="34444544453" aria-label="Vat & Tax ID">
+    </div>
+    <button type="submit">Save</button>
+  </form>
+    
+    

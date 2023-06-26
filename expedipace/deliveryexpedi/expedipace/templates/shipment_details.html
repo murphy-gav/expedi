@@ -1,0 +1,285 @@
+{% include "navbar.html" %}
+
+{% comment %} Hid and Show Forms {% endcomment %}
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<section class="pt-20 pb-10 lg:pt-[10px] lg:pb-10">
+  <div class="container mx-auto">
+    <div class="flex flex-row justify-center">
+      {% if checkout %}
+      <div class="flex-1 mx-5 pl-5 overflow-hidden">
+          <ul>
+              <li class="text-xl text-gray-600 uppercase">Sender</li>
+              <li>{{ checkout.sender_name }}</li>
+              <li>{{ checkout.sender_address }}</li>
+              {% if checkout.sender_address2 %}<li>{{ checkout.sender_address2 }}</li>{% endif %}
+              {% if checkout.sender_address3 %}<li>{{ checkout.sender_address3 }}</li>{% endif %}
+              <li>{{ checkout.sender_pickup_zip }} {{ checkout.sender_city }}</li>
+          </ul>
+      </div>
+      <div class="flex-1 mx-5 pl-1 overflow-hidden">
+          <ul>
+              <li class="text-xl text-gray-600 uppercase">Receiver</li>
+              <li>{{ checkout.receiver_name }}</li>
+              <li>{{ checkout.receiver_address }}</li>
+              {% if checkout.receiver_address2 %}<li>{{ checkout.receiver_address2 }}</li>{% endif %}
+              {% if checkout.receiver_address3 %}<li>{{ checkout.receiver_address3 }}</li>{% endif %}
+              <li>{{ checkout.receiver_delivery_zip }} {{ checkout.receiver_city }}</li>
+          </ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<div class="mt-5 bg-white shadow cursor-pointer rounded-xl mx-auto">
+  <div class="flex-none pt-2.5 pr-2.5 pl-1">
+    <a href="{% url 'shipment_details' %}">
+      <button type="button" class="px-2 py-2 font-medium tracking-wide text-black capitalize transition duration-300 ease-in-out transform rounded-xl hover:bg-gray-300 focus:outline-none active:scale-95">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+          <path d="M0 0h24v24H0V0z" fill="none"></path>
+          <path d="M5 18.08V19h.92l9.06-9.06-.92-.92z" opacity=".3"></path>
+          <path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29s-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83zM3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM5.92 19H5v-.92l9.06-9.06.92.92L5.92 19z"></path>
+        </svg>
+      </button>
+    </a>
+  </div>
+</div>
+
+{% comment %} Shipment Details {% endcomment %}
+<section class="pt-20 pb-10 lg:pt-[10px] lg:pb-10">
+  <div class="container mx-auto">
+    <div class="flex flex-row justify-center">
+      <div style="text-align: center;">
+        <form method="post">
+            {% csrf_token %}
+            <span class="mb-5 inline-block rounded bg-primary py-1 px-4 text-center text-xs font-semibold leading-loose text-white">
+              <strong><h2>Shipment Details</h2></strong>
+            </span>
+            <p class="text-lg text-base text-black">What are you shipping?</p>
+            <div class="lg:pt-[30px] lg:pb-20">
+              <button type="button" id="documents-button" style="border: 1px solid #ccc; background-color: #ccc; color: #fff; padding: 8px 16px;">Documents</button>
+              <button type="button" id="packages-button" style="border: 1px solid #ccc; background-color: #ccc; color: #fff; padding: 8px 16px;">Packages</button>
+            </div>
+            <div id="documents-fields" style="display: none;">
+              <style>
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+                
+                th, td {
+                    border: 1px solid black;
+                    padding: 8px;
+                    text-align: left;
+                }
+                
+                th {
+                    background-color: #e3e3e3;
+                }
+                
+                .label {
+                    background-color: #e3e3e3;
+                }
+            </style>
+            
+            <table>
+               
+                <tr>
+                    <td class="label"><label for="shipping_type">Shipment Type</label></td>
+                    <td><input type="text" class="form-control" id="shipping_type_document" name="shipping_type_document" value="document" readonly></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="description">Select a description</label></td>
+                    <td>
+                        <select name="description" id="description">
+                            <option value="annual-reports">Annual Reports</option>
+                            <option value="bill-of-lading">Bill of Lading</option>
+                            <option value="blank-forms">Blank Forms</option>
+                            <option value="blueprints">Blueprints</option>
+                            <option value="business-cards">Business Cards</option>
+                            <option value="calenders">Calenders</option>
+                            <option value="catalogs">Catalogs</option>
+                            <option value="certificates">Certificates</option>
+                            <option value="charts-graph">Charts, graphs</option>
+                            <option value="completed-forms">Completed Forms</option>
+                            <option value="contract">Contract</option>
+                            <option value="credit-note">Credit Note</option>
+                            <option value="deeds">Deeds</option>
+                            <option value="diplomatic-mail">Diplomatic mail</option>
+                            <option value="documents-business">Documents - general business</option>
+                            <option value="educational-documents">Educational Printed Document</option>
+                            <option value="examination-papers">Examination Papers</option>
+                            <option value="identity-documents">Identity Documents</option>
+                            <option value="invoices-blank">Invoices - blank</option>
+                            <option value="letter">Letter</option>
+                            <option value="manuals">Manuals</option>
+                            <option value="maps">Maps</option>
+                            <option value="music">Music - printed, manuscript</option>
+                            <option value="passports">Passports</option>
+                            <option value="photographs">Photographs</option>
+                            <option value="visa">Visa Applications</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="reference">Reference (appears on shipping label/waybill)</label></td>
+                    <td><input placeholder="Reference on waybill" type="text" name="reference" id="reference"></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="value">What is the value of your shipment?</label></td>
+                    <td><input placeholder="USD" type="number" name="value" id="value"></td>
+                </tr>
+            </table>
+            </div>
+      
+      
+            <div id="packages-fields" style="display: none;">
+              <p class="pt-[10px] py-[10px] text-base text-black">Packages are goods, merchandise or commodities for personal or commercial purposes.</p>
+              <p class="pt-[10px] py-[10px] text-base text-black">What is the purpose of your shipment?</p>
+              <style>
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+                
+                th, td {
+                    border: 1px solid black;
+                    padding: 8px;
+                    text-align: left;
+                }
+                
+                th {
+                    background-color: #e3e3e3;
+                }
+                
+                .label {
+                    background-color: #e3e3e3;
+                }
+            </style>
+            
+            <table>
+               
+                <tr>
+                    <td class="label"><label for="shipping_type">Shipment Type</label></td>
+                    <td><input type="text" class="form-control" id="shipping_type_document" name="shipping_type_document" value="packages" readonly></td>
+                </tr>
+                <tr>
+                    <td class="label"><label for="purpose">Select one</label></td>
+                    <td>
+                      <select name="purpose" id="purpose">
+                        <option value="gift">Gift</option>
+                        <option value="personal">Personal</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="sample">Sample</option>
+                        <option value="return-for-repair">Return for Repair</option>
+                        <option value="return-after-repair">Return after Repair</option>
+                        <option value="claim">Claim</option>
+                        <option value="return-to-seller">Return to Seller</option>
+                      </select>
+                    </td>
+            </table>
+              
+              
+              
+              <p class="pt-[10px] py-[10px] text-base text-black">Describe each unique item in your shipment separately.</p>
+              <p class="pt-[10px] py-[10px] text-base text-black">Avoid shipment delays! Accuracy matters to customs authorities. Add each unique item one at a time. Provide details in English only.</p>
+              <table>
+               
+                <tr>
+                    <td class="label"><label for="item_description">Unique Item Description</label></td>
+                    <td><input placeholder="Description" type="text" name="item_description" id="item_description"></td>
+                </tr>
+                <tr>
+                  <td class="label"><label for="manufacturer_id">Manufacturer's ID</label></td>
+                  <td><input placeholder="1244545" type="text" name="manufacturer_id" id="manufacturer_id"></td>
+                </tr>
+                <tr>
+                  <td class="label"><label for="quantity">Quantity</label></td>
+                  <td><input placeholder="1" type="number" name="quantity" id="quantity"></td>
+                </tr>
+                <tr>
+                  <td class="label"><label for="units">Units (How the item is packaged)</label></td>
+                    <td>
+                      <select name="units" id="units">
+                        <option value="boxes">Boxes</option>
+                        <option value="centimeters">Centimeters</option>
+                        <option value="dozen">Dozen</option>
+                        <option value="pieces">Pieces</option>
+                        <option value="grams">Grams</option>
+                        <option value="kilograms">Kilograms</option>
+                        <option value="liters">Liters</option>
+                        <option value="meters">Meters</option>
+                        <option value="no-unit">No unit required</option>
+                        <option value="number">Number</option>
+                        <option value="ounces">Ounces</option>
+                        <option value="pounds">Pounds</option>
+                        <option value="square-feet">Square feet</option>
+                        <option value="cartons">Cartons</option>
+                        <option value="feet">Feet</option>
+                        <option value="inches">Inches</option>
+                        <option value="yards">Yards</option>
+                      </select>
+                    </td>
+                    <tr>
+                      <td class="label"><label for="item_value">Value (Per Item)</label></td>
+                      <td><input placeholder="USD" type="number" name="item_value" id="item_value"></td>
+                    </tr>
+                    <tr>
+                      <td class="label"><label for="weight">Weight (Per Item)</label></td>
+                      <td><input placeholder="KG" type="number" name="weight" id="weight"></td>
+                    </tr>
+                    <tr>
+                      <td class="label"><label for="item_origin">Where was the item made?</label></td>
+                      <td><input placeholder="KG" type="text" name="item_origin" id="item_origin"></td>
+                    </tr>
+                    <tr>
+                      <td class="label"><label for="schedule_b">Schedule B</label></td>
+                      <td><input placeholder="Schedule B" type="text" name="schedule_b" id="schedule_b"></td>
+                    </tr>
+                    <tr>
+                      <td class="label"><label for="invoice_value">Invoice Value</label></td>
+                      <td><input placeholder="Invoice Value" type="text" name="invoice_value" id="invoice_value"></td>
+                    </tr>
+            </table>
+              
+              
+            </div>
+            <style>
+              /* Add purple border around submit button */
+              input[type="submit"] {
+                background-color: purple;
+                border: 2px solid purple;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+              }
+            </style>
+            
+            <!-- Submit button with purple border and white text -->
+            <div class="pt-20">
+              <input type="submit" value="Submit" class="vd rj ek rc rg gh lk ml il _l gi hi">
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $(document).ready(function() {
+    $('#documents-button').click(function() {
+      $('#packages-fields').hide();
+      $('#documents-fields').show();
+    });
+
+    $('#packages-button').click(function() {
+      $('#documents-fields').hide();
+      $('#packages-fields').show();
+    });
+  });
+</script>
+
+{% include "footer.html" %}

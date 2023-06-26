@@ -1,0 +1,272 @@
+<!-- about.html template -->
+{% include 'navbar.html' %}
+     <section id="about-title" class="py-9">
+        <!-- Section Title Start -->
+        <div
+          x-data="{ sectionTitle: `About GlobalWis`, sectionTitleText: `GlobalWis is a delivery company that provides a wide range of shipping and logistics services to businesses and individuals around the world. With a focus on innovation, efficiency, and customer satisfaction, GlobalWis has become a leader in the transportation industry, offering fast and reliable delivery solutions to meet the needs of its clients. One of the key features of GlobalWis is its comprehensive network of shipping options, which includes air, sea, and ground transportation. This allows the company to offer flexible and customized solutions that are tailored to each client's specific needs. In addition, GlobalWis employs advanced technology and automation systems to streamline its operations, reduce costs, and minimize the environmental impact of its services. Whether shipping small packages or large freight shipments, GlobalWis is committed to delivering high-quality services that meet the demands of today's global marketplace.`}"
+        >
+        <div class="animate_top bb ze rj ki xn vq">
+            <h2
+                x-text="sectionTitle"
+                class="fk vj pr kk wm on/5 gq/2 bb _b"
+            >
+            </h2>
+            <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+          </div>
+        </div>
+        <!-- Section Title End -->
+     </section>
+      <!-- ===== About Start ===== -->
+      <section class="ji gp uq 2xl:ud-py-35 pg">
+        <div class="bb ze ki xn wq">
+          <div class="tc wf gg qq">
+            <!-- About Images -->
+            <div class="animate_left xc gn gg jn/2 i">
+              <div>
+                <img src="/static/assets/images/shape/images/shape-05.svg" alt="Shape" class="h -ud-left-5 x" />
+                <img src="/static/assets/images/shape/images/delivery-shape.png" alt="About" class="ib" />
+                <img src="/static/assets/images/shape/images/delivery-shape-02.png" alt="About" />
+              </div>
+              <div>
+                <img src="/static/assets/images/shape/images/shape-06.svg" alt="Shape" />
+                <img src="/static/assets/images/shape/images/delivery-shape-03.png" alt="About" class="ob gb" />
+                <img src="/static/assets/images/shape/images/shape-07.svg" alt="Shape" class="bb" />
+              </div>
+            </div>
+
+            <!-- About Content -->
+            <div class="animate_right jn/2">
+              <h2 class="fk vj zp pr kk wm qb">Every delivery and every connection presents a vast array of possibilities waiting to be explored.</h2>
+              <div class="mt-3 py-3">
+                <a href="{% url 'trackquote' %}" class="rounded-lg bg-purple py-3 px-7 text-base font-medium text-white hover:bg-opacity-90">
+                  Start Shipment
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ===== About End ===== -->
+
+      <!-- ===== Team Start ===== -->
+      <section class="i pg ji gp uq">
+        <!-- Bg Shapes -->
+        <span class="rc h s r vd fd/5 fh rm"></span>
+        <img src="/static/assets/images/shape/images/shape-08.svg" alt="Shape Bg" class="h q r" />
+        <img src="/static/assets/images/shape/images/shape-09.svg" alt="Shape" class="of h y z/2" />
+        <img src="/static/assets/images/shape/images/shape-10.svg" alt="Shape" class="h _ aa" />
+        <img src="/static/assets/images/shape/images/shape-11.svg" alt="Shape" class="of h m ba" />
+
+        <div class="bb ze i va ki xn xq jb jo">
+          <div class="wc qf pn xo gg cp">
+            <!-- Team Item -->
+            <div class="animate_top rj">
+              <div class="c i pg z-1">
+                <img class="vd" src="/static/assets/images/logo/gbw-who-we-are.jpg" alt="Team" />
+              </div>
+
+              <h4 class="yj go kk wm ob zb">Who we are</h4>
+              <p>GlobalWis is a leading delivery company that offers innovative, efficient, and customizable shipping solutions to clients worldwide.</p>
+            </div>
+
+            <!-- Team Item -->
+            <div class="animate_top rj">
+              <div class="c i pg z-1">
+                <img class="vd" src="/static/assets/images/logo/gbw-what-we-value.jpg" alt="Team" />
+              </div>
+
+              <h4 class="yj go kk wm ob zb">What we value</h4>
+              <p>At GlobalWis, we value innovation, efficiency, reliability, and sustainability in providing our customers with exceptional shipping and logistics solutions.</p>
+            </div>
+
+            <!-- Team Item -->
+            <div class="animate_top rj">
+              <div class="c i pg z-1">
+                <img class="vd" src="/static/assets/images/logo/gbw-how-we-give.jpg" alt="Team" />
+              </div>
+
+              <h4 class="yj go kk wm ob zb">How we give back</h4>
+              <p>GlobalWis gives back by supporting local communities, charities and initiatives, and by minimizing the environmental impact of its operations.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ===== Team End ===== -->
+
+      <!-- ===== Services Start ===== -->
+      <section class="lj tp kr">
+        <!-- Section Title Start -->
+        <div
+          x-data="{ sectionTitle: `We Offer The Best Quality Service for You`, sectionTitleText: `Our delivery company provides unparalleled quality service, tailored to meet your needs and exceed expectations.`}"
+        >
+          <div class="animate_top bb ze rj ki xn vq">
+    <h2
+            x-text="sectionTitle"
+            class="fk vj pr kk wm on/5 gq/2 bb _b"
+    >
+    </h2>
+    <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+</div>
+
+
+        </div>
+        <!-- Section Title End -->
+
+        <div class="bb ze ki xn yq mb en">
+          <div class="wc qf pn xo ng">
+            <!-- Service Item -->
+            <div class="animate_top sg oi pi zq ml il am cn _m">
+              <img src="/static/assets/images/shape/images/icon-04.svg" alt="Icon" />
+              <h4 class="ek zj kk wm nb _b">Drop off a Package</h4>
+              <p>Conveniently drop off your package at our locations.
+                When you need to send a package, our delivery company provides convenient drop-off locations, saving you time and effort. We offer quick and secure service for all of your package delivery needs.</p>
+            </div>
+
+            <!-- Service Item -->
+            <div class="animate_top sg oi pi zq ml il am cn _m">
+              <img src="/static/assets/images/shape/images/icon-05.svg" alt="Icon" />
+              <h4 class="ek zj kk wm nb _b">Redirect a Package</h4>
+              <p>Easily redirect your package to a new address.
+                Sometimes, plans change, and packages need to be redirected to a new address. Our delivery company makes it easy to update shipping information and ensure that your package arrives at its intended destination.</p>
+            </div>
+
+            <!-- Service Item -->
+            <div class="animate_top sg oi pi zq ml il am cn _m">
+              <img src="/static/assets/images/shape/images/icon-06.svg" alt="Icon" />
+              <h4 class="ek zj kk wm nb _b">Store Hours and Services</h4>
+              <p>Discover our services and store hours.
+                To make your delivery experience as smooth as possible, we provide information about our services and store hours. From shipping options to in-store pick-up, we're here to help with all of your delivery needs.</p>
+            </div>
+
+            <!-- Service Item -->
+            <div class="animate_top sg oi pi zq ml il am cn _m">
+              <img src="/static/assets/images/shape/images/icon-07.svg" alt="Icon" />
+              <h4 class="ek zj kk wm nb _b">Service Alerts</h4>
+              <p>Stay up-to-date on service disruptions and delays.
+                We understand that timing is critical when it comes to delivery. That's why we provide service alerts to keep you informed of any potential disruptions or delays that may impact your package.p>
+            </div>
+
+            <!-- Service Item -->
+            <div class="animate_top sg oi pi zq ml il am cn _m">
+              <img src="/static/assets/images/shape/images/icon-05.svg" alt="Icon" />
+              <h4 class="ek zj kk wm nb _b">Return a Package</h4>
+              <p>Hassle-free returns for your convenience.
+                At our delivery company, we want to ensure that your delivery experience is hassle-free from start to finish. That's why we offer simple and convenient return options for your convenience.</p>
+            </div>
+
+            <!-- Service Item -->
+            <div class="animate_top sg oi pi zq ml il am cn _m">
+              <img src="/static/assets/images/shape/images/icon-06.svg" alt="Icon" />
+              <h4 class="ek zj kk wm nb _b">Support 24/7</h4>
+              <p>Our team is always ready to assist you.
+                We understand that questions and concerns can arise at any time, which is why our support team is available 24/7 to provide assistance. Whether you have a question about a delivery or need help with tracking, we're here to help.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ===== Services End ===== -->
+
+<!-- CTA Section -->
+<section class="py-20 lg:py-[120px]">
+    <div class="container mx-auto">
+      <div
+        class="relative z-10 overflow-hidden rounded bg-purple py-12 px-8 md:p-[70px] rounded-lg"
+      >
+        <div class="-mx-4 flex flex-wrap items-center">
+          <div class="w-full px-4 lg:w-1/2">
+            <span class="mb-2 text-base font-semibold text-white">
+                Let us help streamline your efforts
+            </span>
+            <h2
+              class="mb-6 text-3xl font-bold leading-tight text-white sm:mb-8 sm:text-[38px] lg:mb-0"
+            >
+                Our delivery services are designed to assist you with all of your shipping needs.
+            </h2>
+          </div>
+          <div class="w-full px-4 lg:w-1/2">
+            <div class="flex flex-wrap lg:justify-end">
+              <a
+                href="{% url "trackquote" %}"
+                class="my-1 mr-4 inline-block rounded bg-white bg-opacity-[15%] py-4 px-6 text-base font-medium text-white transition hover:bg-opacity-100 hover:text-primary md:px-9 lg:px-6 xl:px-9"
+              >
+                Start Shipment
+              </a>
+              <a
+                href="{% url 'tracking' %}"
+                class="my-1 inline-block rounded bg-white py-4 px-6 text-base font-medium text-black transition hover:bg-opacity-90 md:px-9 lg:px-6 xl:px-9"
+              >
+                Track Package
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="absolute top-0 left-0 z-[-1]">
+            <svg
+              width="189"
+              height="162"
+              viewBox="0 0 189 162"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <ellipse
+                cx="16"
+                cy="-16.5"
+                rx="173"
+                ry="178.5"
+                transform="rotate(180 16 -16.5)"
+                fill="url(#paint0_linear)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear"
+                  x1="-157"
+                  y1="-107.754"
+                  x2="98.5011"
+                  y2="-106.425"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="white" stop-opacity="0.07" />
+                  <stop offset="1" stop-color="white" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="absolute bottom-0 right-0 z-[-1]">
+            <svg
+              width="191"
+              height="208"
+              viewBox="0 0 191 208"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <ellipse
+                cx="173"
+                cy="178.5"
+                rx="173"
+                ry="178.5"
+                fill="url(#paint0_linear)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear"
+                  x1="-3.27832e-05"
+                  y1="87.2457"
+                  x2="255.501"
+                  y2="88.5747"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="white" stop-opacity="0.07" />
+                  <stop offset="1" stop-color="white" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% include 'footer.html' %}
+

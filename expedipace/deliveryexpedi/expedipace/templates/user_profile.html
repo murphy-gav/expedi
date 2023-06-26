@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link
+      rel="shortcut icon"
+      href="/static/assets/images/favicon.ico"
+      type="image/x-icon"
+    />
+    <title>Global Wis | Logistics Company</title>
+    <meta name="description" content="GlobalWis is an industry leader in logistics, renowned for its exceptional services in international shipping, transportation, and courier operations.">
+
+    <!-- Tailwind -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+        .font-family-karla { font-family: karla; }
+        .bg-sidebar { background: #101e53; }
+        .cta-btn { color: #811281; }
+        .upgrade-btn { background: #1947ee; }
+        .upgrade-btn:hover { background: #0038fd; }
+        .active-nav-link { background: #811281; }
+        .nav-item:hover { background: #811281; }
+        .account-link:hover { background: #3d68ff; }
+    </style>
+</head>
+<body class="bg-gray-100 font-family-karla flex">
+
+    <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
+        <div class="p-6">
+            <a href="{% url 'home' %}" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">
+                <img
+                    src="/static/assets/images/logo/logo-white.png"
+                    alt="logo"
+                    class="w-full"
+                />
+            </a>
+            <button onclick="window.location.href='{% url 'create_shipment' %}'" class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-plus mr-3"></i> Create Shipment
+            </button>    
+        </div>
+        <nav class="text-white text-base font-semibold pt-3">
+            <a href="{% url 'dashboard' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                Dashboard
+            </a>
+            <a href="{% url 'manage_shipments' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-table mr-3"></i>
+                Manage Shipment
+            </a>
+            <a href="{% url 'user_information' %}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+                <i class="fas fa-align-left mr-3"></i>
+                My Profile
+            </a>
+            <a href="{% url 'payment_settings' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-tablet-alt mr-3"></i>
+                Payment Settings
+            </a>
+            <a href="{% url 'support' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-calendar mr-3"></i>
+                Support
+            </a>
+        </nav>
+    </aside>
+    <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
+        <!-- Desktop Header -->
+        <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
+            <div class="w-1/2"></div>
+            <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
+                    {% if contact.image %}
+                        <img src="/static/assets/profileimg/{{ contact.image.url }}" />
+                    {% else %}
+                        <img src="/static/assets/profileimg/profile-default.jpg" />
+                    {% endif %}
+                </button>
+                <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
+                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
+                    <a href={% url 'home' %} class="block px-4 py-2 account-link hover:text-white">Account</a>
+                    <a href={% url 'support' %} class="block px-4 py-2 account-link hover:text-white">Support</a>
+                    <a href="{% url 'logout' %}" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Header & Nav -->
+        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
+            <div class="p-6">
+                <a href="{% url 'home' %}" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">
+                <img
+                    src="/static/assets/images/logo/logo-white.png"
+                    alt="logo"
+                    class="w-full"
+                />
+            </a>
+                <button onclick="window.location.href='{% url 'create_shipment' %}'" class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                    <i class="fas fa-plus mr-3"></i> Create Shipment
+                </button>    
+            </div>
+            <!--Dropdown Nav-->
+            <nav class="text-white text-base font-semibold pt-3">
+                <a href="{% url 'dashboard' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
+                </a>
+                <a href="{% url 'manage_shipments' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-table mr-3"></i>
+                    Manage Shipment
+                </a>
+                <a href="{% url 'user_information' %}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+                    <i class="fas fa-align-left mr-3"></i>
+                    My Profile
+                </a>
+                <a href="{% url 'payment_settings' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-tablet-alt mr-3"></i>
+                    Payment Settings
+                </a>
+                <a href="{% url 'support' %}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                    <i class="fas fa-calendar mr-3"></i>
+                    Support
+                </a>
+            </nav>
+        </header>
+    
+        <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+            <main class="w-full flex-grow p-6">
+                <h1 class="w-full text-3xl text-black pb-6">My Profile Details</h1>
+
+                <div class="flex flex-wrap">
+                    <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+                        <p class="text-xl pb-6 flex items-center">
+                            <i class="fas fa-list mr-3"></i> My Contact Information
+                        </p>
+                        <div class="leading-loose">
+                            <form class="p-10 bg-white rounded shadow-xl">
+                                <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                                    <button style="width: 200px; height: 200px;" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
+                                        {% if contact.image %}
+                                            <img src="/static/assets/profileimg/{{ form.instance.image.url }}">
+                                         {% else %}
+                                            <img src="/static/assets/profileimg/profile-default.jpg" />
+                                        {% endif %}
+                                    </button>
+                                </div>
+                                
+                                <div class="">
+                                    <label class="block text-sm text-gray-600" for="name">Name</label>
+                                    <input value="{{contact.name}}" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text" required="" placeholder="Your Name" aria-label="Name">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="email">Email</label>
+                                    <input value="{{contact.email}}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="text" required="" placeholder="Your Email" aria-label="Email">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="company">Company</label>
+                                    <input value="{{contact.company}}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="company" name="company" type="text" required="" placeholder="Your Company" aria-label="Company">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="country">Country</label>
+                                    <input value="{{contact.country}}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="country" name="country" type="text" required="" placeholder="Your Country" aria-label="Country">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="address">Address</label>
+                                    <input value="{{contact.address}}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="address" name="address" type="text" required="" placeholder="Your Address" aria-label="Address">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="address2">Address 2</label>
+                                    <input value="{{contact.address2}}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="address2" name="address2" type="text" required="" placeholder=" Apartments or Suite" aria-label="Address 2">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="zip_code">Postal Code</label>
+                                    <input value="{{contact.zip_code}}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="zip_code" name="zip_code" type="number" required="" placeholder="zip_code" aria-label="Postal Code">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="city">City</label>
+                                    <input value="{{contact.city}}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="city" name="city" type="text" required="" placeholder="City" aria-label="City">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm text-gray-600" for="phone_number">Phone Number</label>
+                                    <input value="+{{contact.phone_country_code}} {{contact.phone_number}}" class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="phone_number" name="phone_number" type="text" required="" placeholder="City" aria-label="City">
+                                </div>
+                                <div class="mt-6">
+                                    <a href="{% url 'user_information_update' %}"><button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="button">Edit</button></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+    
+            <footer class="w-full bg-white text-right pt-20">
+                <a target="_blank" href="https://davidgrzyb.com" class="text-base text-xl text-bold">&copy; 2023 GlobalWis. All Rights Reserved</a>
+            </footer>
+        </div>
+        
+    </div>
+
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+</body>
+</html>

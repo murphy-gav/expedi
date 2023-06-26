@@ -1,0 +1,77 @@
+{% include 'navbar.html' %}
+
+<section class="i pg fh rm ki xn vq gj qp gr hj rp hr">
+  <img src="/static/assets/images/shape/images/shape-06.svg" alt="Shape" class="h j k" />
+  <img src="/static/assets/images/shape/images/shape-03.svg" alt="Shape" class="h l m" />
+  <img src="/static/assets/images/shape/images/shape-17.svg" alt="Shape" class="h n o" />
+  <img src="/static/assets/images/shape/images/shape-18.svg" alt="Shape" class="h p q" />
+
+    <div class="animate_top relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 text-left sm:px-12 md:px-[60px]">
+      <!-- Bg Border -->
+      <span class="rc h r s zd/2 od zg gh"></span>
+      <span class="rc h r q zd/2 od xg mh"></span>
+
+      <div class="rj">
+        <h2 class="ek ck kk wm xb">Create an Account</h2>
+      </div>
+
+      <form class="login100-form validate-form" action="{% url 'sign_up' %}" method="POST">
+        {% csrf_token %}
+        <div class="wb">
+          <label class="rc kk wm vb" for="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Devid Wonder"
+            class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40"
+          />
+        </div>
+
+        <div class="wb">
+          <label class="rc kk wm vb" for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="example@gmail.com"
+            class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40"
+          />
+        </div>
+
+        <div class="wb">
+          <label class="rc kk wm vb" for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="**************"
+            class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40"
+          />
+        </div>
+
+        <div class="wb">
+          <label class="rc kk wm vb" for="password2">Confirm Password</label>
+          <input
+            type="password"
+            name="password2"
+            id="password2"
+            placeholder="**************"
+            class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40"
+          />
+        </div>
+
+        <button class="vd rj ek rc rg gh lk ml il _l gi hi" type="submit">
+          Sign Up
+        </button>
+
+        <p class="sj hk xj rj ob">
+          Already have an account?
+          <a class="mk" href="{% url 'login' %}"> Sign In </a>
+        </p>
+      </form>
+    </div>
+  </section>
+  <!-- ===== SignUp Form End ===== -->
+
+{% include 'footer.html' %}

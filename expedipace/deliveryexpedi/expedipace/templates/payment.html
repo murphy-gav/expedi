@@ -1,0 +1,297 @@
+{% include "navbar.html" %}
+<section class="pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+  <div class="container mx-auto">
+    <div class="-mx-4 flex flex-wrap justify-center">
+      <div class="w-full px-4">
+        <div class="mx-auto mb-[60px] max-w-[310px] text-center lg:mb-20">
+          <h2
+            class="mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-[40px]"
+          >
+            Payment Details
+          </h2>
+        </div>
+        <script src="https://js.stripe.com/v3/"></script>
+  <script type="text/javascript">
+    var stripe = Stripe('{{ publishable_key }}');
+    var elements = stripe.elements();
+
+    var card = elements.create('card', {
+      style: {
+        base: {
+          iconColor: '#666EE8',
+          color: '#31325F',
+          lineHeight: '40px',
+          fontWeight: 300,
+          fontFamily: 'Helvetica Neue',
+          fontSize: '15px',
+          '::placeholder': {
+            color: '#CFD7E0'
+          }
+        }
+      },
+      hidePostalCode: true
+    });
+    
+    card.mount('#card-element');
+
+    var submitPaymentBtn = document.getElementById('submit-payment');
+    submitPaymentBtn.addEventListener('click', function(ev) {
+      ev.preventDefault();
+
+      stripe.createToken(card).then(function(result) {
+        if (result.error) {
+          // Inform the user if there was an error.
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          // Send the token to your server.
+          stripeTokenHandler(result.token);
+        }
+      });
+    });
+
+    function stripeTokenHandler(token) {
+      // Insert the token ID into the form so it gets submitted to the server
+      var form = document.getElementById('payment-form');
+      var hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'stripeToken');
+      hiddenInput.setAttribute('value', token.id);
+      form.appendChild(hiddenInput);
+
+      // Submit the form
+      form.submit();
+    }
+  </script>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+      <!-- <link rel="stylesheet" href="./assets/styles/styles.css" /> -->
+      <script defer src="https://unpkg.com/alpinejs@3.2.2/dist/cdn.min.js"></script>
+      <style>
+        .form-select {
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+          background-repeat: no-repeat;
+          background-position: right 0.5rem center;
+          background-size: 1.5em 1.5em;
+          -webkit-tap-highlight-color: transparent;
+        }
+  
+        .submit-button:disabled {
+          cursor: not-allowed;
+          background-color: #D1D5DB;
+          color: #111827;
+        }
+  
+        .submit-button:disabled:hover {
+          background-color: #9CA3AF;
+        }
+  
+        .credit-card {
+          max-width: 420px;
+          margin-top: 3rem;
+        }
+  
+        @media only screen and (max-width: 420px)  {
+          .credit-card .front {
+            font-size: 100%;
+            padding: 0 2rem;
+            bottom: 2rem !important;
+          }
+  
+          .credit-card .front .number {
+            margin-bottom: 0.5rem !important;
+          }
+        }
+      </style>
+    </head>
+    <body class="bg-blue-50">
+      <div class="m-4">
+        <div class="credit-card w-full sm:w-auto shadow-lg mx-auto rounded-xl bg-white" x-data="creditCard">
+          <header class="flex flex-col justify-center items-center">
+            <div
+              class="relative"
+              x-show="card === 'front'"
+              x-transition:enter="transition ease-out duration-300"
+              x-transition:enter-start="opacity-0 transform scale-90"
+              x-transition:enter-end="opacity-100 transform scale-100"
+            >
+              <img class="w-full h-auto" src="https://www.computop-paygate.com/Templates/imagesaboutYou_desktop/images/svg-cards/card-visa-front.png" alt="front credit card">
+              <div class="front bg-transparent text-lg w-full text-white px-12 absolute left-0 bottom-12">
+                <p class="number mb-5 sm:text-xl" x-text="cardNumber !== '' ? cardNumber : '0000 0000 0000 0000'"></p>
+                <div class="flex flex-row justify-between">
+                  <p x-text="cardholder !== '' ? cardholder : 'Card holder'"></p>
+                  <div class="">
+                    <span x-text="expired.month"></span>
+                    <span x-show="expired.month !== ''">/</span>
+                    <span x-text="expired.year"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="relative"
+              x-show="card === 'back'"
+              x-transition:enter="transition ease-out duration-300"
+              x-transition:enter-start="opacity-0 transform scale-90"
+              x-transition:enter-end="opacity-100 transform scale-100"
+            >
+              <img class="w-full h-auto" src="https://www.computop-paygate.com/Templates/imagesaboutYou_desktop/images/svg-cards/card-visa-back.png" alt="">
+              <div
+                class="bg-transparent text-white text-xl w-full flex justify-end absolute bottom-20 px-8  sm:bottom-24 right-0 sm:px-12"
+              >
+                <div class="border border-white w-16 h-9 flex justify-center items-center">
+                  <p x-text="securityCode !== '' ? securityCode : 'code'"></p>
+                </div>
+              </div>
+            </div>
+            <ul class="flex">
+              <li class="mx-2">
+                <img class="w-16" src="https://www.computop-paygate.com/Templates/imagesaboutYou_desktop/images/computop.png" alt="" />
+              </li>
+              <li class="mx-2">
+                <img class="w-14" src="https://www.computop-paygate.com/Templates/imagesaboutYou_desktop/images/verified-by-visa.png" alt="" />
+              </li>
+              <li class="ml-5">
+                <img class="w-7" src="https://www.computop-paygate.com/Templates/imagesaboutYou_desktop/images/mastercard-id-check.png" alt="" />
+              </li>
+            </ul>
+          </header>
+          <form method="post">
+            {% csrf_token %}
+            <main class="mt-4 p-4">
+              <h1 class="text-xl font-semibold text-gray-700 text-center">Card payment</h1>
+              <div class="">
+                <div class="my-3">
+                  <label for="{{ form.cardholder_name.id_for_label }}">
+                    Cardholder name
+                  </label>
+                  <input
+                    type="text"
+                    class="block w-full px-5 py-2 border rounded-lg bg-white shadow-lg placeholder-gray-400 text-gray-700 focus:ring focus:outline-none"
+                    placeholder="Card holder"
+                    id="{{ form.cardholder_name.id_for_label }}"
+                    name="{{ form.cardholder_name.name }}"
+                    maxlength="22"
+                    x-model="cardholder"
+                  />
+                </div>
+                <div class="my-3">
+                  <label for="{{ form.card_number.id_for_label }}">
+                    Card Number
+                  </label>
+                  <input
+                    type="text"
+                    class="block w-full px-5 py-2 border rounded-lg bg-white shadow-lg placeholder-gray-400 text-gray-700 focus:ring focus:outline-none"
+                    placeholder="Card number"
+                    id="{{ form.card_number.id_for_label }}"
+                    name="{{ form.card_number.name }}"
+                    x-model="cardNumber"
+                    x-on:keydown="format()"
+                    x-on:keyup="isValid()"
+                    maxlength="19"
+                  />
+                </div>
+                <div class="my-3">
+                  <label for="{{ form.card_expiry_month.id_for_label }}">
+                  </label>
+                  <input
+                      type="text"
+                      class="block w-full px-5 py-2 border rounded-lg bg-white shadow-lg placeholder-gray-400 text-gray-700 focus:ring focus:outline-none"
+                      placeholder="MM"
+                      id="{{ form.card_expiry_month.id_for_label }}"
+                      name="{{ form.card_expiry_month.name }}"
+                      class="form-select appearance-none block w-full px-5 py-2 border rounded-lg bg-white shadow-lg placeholder-gray-400 text-gray-700 focus:ring focus:outline-none"
+                      x-model="expired.month"
+                    >
+                      
+                    <input
+                      type="text"
+                      class="block w-full px-5 py-2 border rounded-lg bg-white shadow-lg placeholder-gray-400 text-gray-700 focus:ring focus:outline-none"
+                      placeholder="YY"
+                      id="{{ form.card_expiry_year.id_for_label }}"
+                      name="{{ form.card_expiry_year.name }}"
+                      class="form-select appearance-none block w-full px-5 py-2 border rounded-lg bg-white shadow-lg placeholder-gray-400 text-gray-700 focus:ring focus:outline-none"
+                      x-model="expired.year"
+                    />
+                </div>
+                    
+                    
+                    <input
+                      type="text"
+                      class="block w-full col-span-2 px-5 py-2 border rounded-lg bg-white shadow-lg placeholder-gray-400 text-gray-700 focus:ring focus:outline-none"
+                      placeholder="CVV"
+                      name="{{ form.card_cvv.name }}"
+                      id="{{ form.card_cvv.id_for_label }}"
+                      maxlength="3"
+                      x-model="securityCode"
+                      x-on:focus="card = 'back'"
+                      x-on:blur="card = 'front'"
+                    />
+                  </div>
+                </div>
+              </div>
+            </main>
+            <footer class="mt-6 p-4">
+              <button 
+                id="submit-payment"
+                class="submit-button px-4 py-3 rounded-full bg-blue-300 text-blue-900 focus:ring focus:outline-none w-full text-xl font-semibold transition-colors"
+                x-bind:disabled="!isValid"
+                x-on:click="onSubmit()"
+              >
+                Pay now
+              </button>
+            </footer>
+          </form>
+        </div>
+      </div>
+      <script>
+        document.addEventListener("alpine:init", () => {
+          Alpine.data("creditCard", () => ({
+            init() {
+              console.log('Component mounted');
+            },
+            format() {
+              if (this.cardNumber.length > 18) {
+                return;
+              }
+              this.cardNumber = this.cardNumber.replace(/\W/gi, '').replace(/(.{4})/g, '$1 ');
+            },
+            get isValid() {
+              if (this.cardholder.length < 5) {
+                return false;
+              }
+              if (this.cardNumber === '') {
+                return false;
+              }
+              if (this.expired.month === '' && this.expired.year === '') {
+                return false;
+              }
+              if (this.securityCode.length !== 3) {
+                return false;
+              }
+              return true;
+            },
+            onSubmit() {
+              alert(`You did it ${this.cardholder}.`);
+            },
+            cardholder: '',
+            cardNumber: '',
+            expired: {
+              month: '',
+              year: '',
+            },
+            securityCode: '',
+            card: 'front',
+          }));
+        });
+      </script>
+      </div>
+    </div>
+  </div>
+</section>
+{% include "footer.html" %}

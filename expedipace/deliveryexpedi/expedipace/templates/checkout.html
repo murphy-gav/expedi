@@ -1,0 +1,215 @@
+{% include 'navbar.html' %}
+
+<section class="pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+  <div class="container mx-auto">
+    <div class="-mx-4 flex flex-wrap justify-center">
+      <div class="w-full px-4">
+        <div class="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">
+          <h2
+            class="mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-[40px]"
+          >
+            Shipment Checkout
+          </h2>
+        </div>
+      </div>
+    </div>
+    <form method="post" action="{% url 'checkout' %}">
+      {% csrf_token %}
+      <div class="-mx-4 flex flex-wrap">
+        <div class="w-full px-4 md:w-1/2 lg:w-1/2">
+          <div class="mx-auto mb-10 max-w-[491px]">
+            <div>
+              <span
+                class="mb-5 inline-block rounded bg-primary py-1 px-4 text-center text-xs font-semibold leading-loose text-white"
+              >
+                Sender's Contact Information
+              </span>
+              <div>
+                <div class="flex flex-row">
+                  <div class="wb">
+                    <label class="rc kk wm vb" for="sender_name">Name *</label>
+                    <input type="text" placeholder="Name" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_name.id_for_label }}" name="{{ form.sender_name.name }}" value="{{ form.sender_name.initial|default:'' }}" required>
+                  </div>
+                  <div class="wb mx-4">
+                    <label class="rc kk wm vb" for="sender_company">Company *</label>
+                    <input type="text" placeholder="Company" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_company.id_for_label }}" name="{{ form.sender_company.name }}">
+                  </div>
+                </div>
+                <div class="flex flex-row">
+                  <div class="wb">
+                    <label class="rc kk wm vb" for="sender_pickup_country">Country *</label>
+                    <input type="text" placeholder="Select Country" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_pickup_country.id_for_label }}" name="{{ form.sender_pickup_country.name }}" value="{{ pickup_country }}" readonly>
+                  </div>
+                  <div class="wb mx-4">
+                    <label class="rc kk wm vb" for="sender_address">Address *</label>
+                    <input type="text" placeholder="1234 Main St" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_address.id_for_label }}" name="{{ form.sender_address.name }}">
+                  </div>
+                </div>
+                <div class="flex flex-row">
+                  <div class="wb">
+                    <label class="rc kk wm vb" for="sender_address2">Address 2 *</label>
+                    <input type="text" placeholder="Apartment or suite" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_address2.id_for_label }}" name="{{ form.sender_address2.name }}">
+                  </div>
+                  <div class="wb mx-4">
+                    <label class="rc kk wm vb" for="sender_address3">Address 3 *</label>
+                    <input type="text" placeholder="Address 3" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_address3.id_for_label }}" name="{{ form.sender_address3.name }}">
+                  </div>
+                </div>
+                <div class="mx-4 wb">
+                  <label class="rc kk wm vb" for="sender_state">State *</label>
+                  <input type="text" placeholder="State" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/50" style="width:470px;" id="{{ form.sender_state.id_for_label }}" name="{{ form.sender_state.name }}">
+                </div>
+                <div class="flex flex-row">
+                  <div class="wb mx-4">
+                    <label class="rc kk wm vb" for="sender_city">City *</label>
+                    <input type="text" placeholder="City" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_city.id_for_label }}" name="{{ form.sender_city.name }}">
+                  </div>
+                  <div class="wb">
+                    <label class="rc kk wm vb" for="sender_pickup_zip">Postal Code *</label>
+                    <input type="number" placeholder="123456" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_pickup_zip.id_for_label }}" name="{{ form.sender_pickup_zip.name }}">
+                  </div>
+                </div>
+              </div>
+              <div class="mx-4 wb">
+                <label class="rc kk wm vb" for="sender_email">Email *</label>
+                <input type="email" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40  " placeholder="{{ user.email }}" style="width:470px;" id="{{ form.sender_email.id_for_label }}" name="{{ form.sender_email.name }}">
+              </div>
+              <div class="flex flex-row">
+                <div class="wb mx-4">
+                  <label class="rc kk wm vb" for="sender_phone_type">Phone Type *</label>
+                  <select class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_phone_type.id_for_label }}" name="{{ form.sender_phone_type.name }}">
+                    <option value="Office">Office</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Home">Home</option>
+                    <option value="Fax">Fax</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="wb">
+                  <label class="rc kk wm vb" for="sender_phone_code">Country Code *</label>
+                  <input type="number" placeholder="123456" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.sender_phone_code.id_for_label }}" name="{{ form.sender_phone_code.name }}">
+                </div>
+              </div>
+              <div class="mx-4 wb">
+                <label class="rc kk wm vb" for="sender_phone_number">Phone Number *</label>
+                <input type="number" placeholder="(645) 546-6445" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" style="width:470px;" id="{{ form.sender_phone_number.id_for_label }}" name="{{ form.sender_phone_number.name }}">
+              </div>
+            </div>
+            <div>
+                <span
+                  class="mb-5 inline-block rounded bg-primary py-1 px-4 text-center text-xs font-semibold leading-loose text-white"
+                >
+                  Shipment Information
+                </span>
+                <div class="-mx-4 wb">
+                  <label for="{{ form.create_shipment.id_for_label }}">Create Shipment: </label>
+                  {{ form.create_shipment }}
+                </div>
+                <div class="-mx-4 wb">
+                  <label for="{{ form.pay.id_for_label }}">Pay: </label>
+                  {{ form.pay }}
+                </div>
+                <div class="-mx-4 wb">
+                  <label for="{{ form.print.id_for_label }}">Print: </label>
+                  {{ form.print }}
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full px-4 md:w-1/2 lg:w-1/2">
+          <div class="mx-auto mb-10 max-w-[491px]">
+            <div>
+              <span
+                class="mb-5 inline-block rounded bg-primary py-1 px-4 text-center text-xs font-semibold leading-loose text-white"
+              >
+                Receiver's Contact Information
+              </span>
+              <div>
+                <div class="wb">
+                  <label class="rc kk wm vb">
+                    <span class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">Browse</span>
+                    <input type="file" class="hidden" :multiple="multiple" :accept="accept">
+                  </label>
+                </div>
+                <div class="flex flex-row">
+                  <div class="wb mx-4">
+                    <label class="rc kk wm vb" for="receiver_name">Name *</label>
+                    <input type="text" placeholder="Name" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_name.id_for_label }}" name="{{ form.receiver_name.name }}" value="{{ form.receiver_name.initial|default:'' }}" required>
+                  </div>
+                  <div class="wb">
+                    <label class="rc kk wm vb" for="receiver_company">Company *</label>
+                    <input type="text" placeholder="Company" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_company.id_for_label }}" name="{{ form.receiver_company.name }}">
+                  </div>
+                </div>
+                <div class="flex flex-row">
+                  <div class="wb mx-4">
+                    <label class="rc kk wm vb" for="receiver_delivery_country">Country *</label>
+                    <input type="text" placeholder="Input Country" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_delivery_country.id_for_label }}" name="{{ form.pickup_country.name }}" value="{{ delivery_country }}">
+                  </div>
+                  <div class="wb">
+                    <label class="rc kk wm vb" for="receiver_address">Address *</label>
+                    <input type="text" placeholder="1234 Main St" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_address.id_for_label }}" name="{{ form.receiver_address.name }}">
+                  </div>
+                </div>
+                <div class="flex flex-row">
+                  <div class="wb mx-4">
+                    <label class="rc kk wm vb" for="receiver_address2">Address 2 *</label>
+                    <input type="text" placeholder="Apartment or suite" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_address2.id_for_label }}" name="{{ form.receiver_address2.name }}">
+                  </div>
+                  <div class="wb">
+                    <label class="rc kk wm vb" for="receiver_address3">Address 3 *</label>
+                    <input type="text" placeholder="Address 3" class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_address3.id_for_label }}" name="{{ form.receiver_address3.name }}">
+                  </div>
+                </div>
+                <div class="wb mx-4">
+                  <label class="rc kk wm vb" for="receiver_state">State *</label>
+                  <input type="text" placeholder="State" class="avd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" style="width:470px;" id="{{ form.receiver_state.id_for_label }}" name="{{ form.receiver_state.name }}">
+                </div>
+                <div class="flex flex-row">
+                  <div class="wb mx-4">
+                    <label class="rc kk wm vb" for="receiver_city">City *</label>
+                    <input type="text" placeholder="City" class="avd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_city.id_for_label }}" name="{{ form.receiver_city.name }}">
+                  </div>
+                  <div class="wb">
+                    <label class="rc kk wm vb" for="receiver_delivery_zip">Postal Code *</label>
+                    <input type="number" placeholder="123456" class="avd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_delivery_zip.id_for_label }}" name="{{ form.receiver_delivery_zip.name }}">
+                  </div>
+                </div>
+                <div class="wb mx-4">
+                  <label class="rc kk wm vb" for="receiver_email">Email *</label>
+                  <input type="email" class="avd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" placeholder="jeff@example.com" style="width:470px;" id="{{ form.receiver_email.id_for_label }}" name="{{ form.receiver_email.name }}">
+                </div>
+                <div class="flex flex-row">
+                  <div class="wb mx-4">
+                    <label class="rc kk wm vb" for="receiver_phone_type">Phone Type *</label>
+                    <select class="avd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_phone_type.id_for_label }}" name="{{ form.receiver_phone_type.name }}">
+                      <option value="Office">Office</option>
+                      <option value="Personal">Personal</option>
+                      <option value="Home">Home</option>
+                      <option value="Fax">Fax</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="wb">
+                    <label class="rc kk wm vb" for="receiver_phone_code">Country Code *</label>
+                    <input type="number" placeholder="+44 " class="avd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" id="{{ form.receiver_phone_code.id_for_label }}" name="{{ form.receiver_phone_code.name }}">
+                  </div>
+                </div>
+                <div class="wb mx-4">
+                  <label class="rc kk wm vb" for="receiver_phone_number">Phone Number *</label>
+                  <input type="number" placeholder="(645) 546-6445" class="avd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" style="width:470px" id="{{ form.receiver_phone_number.id_for_label }}" name="{{ form.receiver_phone_number.name }}">
+                </div>
+                <div class="wb mx-4">
+                  <label class="rc kk wm vb" for="vat_tax_id">VAT/TAX ID *</label>
+                  <input type="number" placeholder="12345678912" class="avd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" style="width:470px" id="{{ form.vat_tax_id.id_for_label }}" name="{{ form.vat_tax_id.name }}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="vd rj ek rc rg gh lk ml il _l gi hi">Submit</button>
+    </form>
+  </div>
+</section>
+{% include 'footer.html' %}
